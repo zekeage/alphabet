@@ -205,6 +205,23 @@ line-height: 1.4;
 
 </head>
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '108717309465953',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <section class='container'>
           <hgroup>
             <h1>HELLO MATTHEW STRESINSKY.  I HAVE A WEBPAGE HOSTED ON A FREE SERVER AND THE ABILITY TO PUSH CODE CHANGES TO THE SERVER USING GIT.  I STILL NEED TO FIGURE OUT HOW TO LET MULTIPLE PEOPLE PUSH CHANGES THOUGH.</h1>
