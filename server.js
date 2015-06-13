@@ -110,7 +110,7 @@ var alphabet = function() {
         self.proutes = { };
         self.proutes['/feed'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            res.send(self.cache_get('feed.html') );
         };
     };
 
