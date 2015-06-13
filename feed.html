@@ -13,12 +13,13 @@ TEXT THAT YOU SHOULD SEE
 MORE TEXT THAT YOU SHOULD SEE
 <script>
   window.fbAsyncInit = function() {
+    console.log('initializing');
     FB.init({
       appId      : '108718566132494',
       xfbml      : true,
       version    : 'v2.3'
     });
-
+    console.log('initializing2');
     // ADD ADDITIONAL FACEBOOK CODE HERE
   };
 
