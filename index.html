@@ -223,7 +223,32 @@ line-height: 1.4;
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+   
+   function onLogin(response) {
+  if (response.status == 'connected') {
+    FB.api('/me?fields=first_name', function(data) {
+      var welcomeBlock = document.getElementById('fb-welcome');
+      welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+    });
+  }
+}
+
+FB.getLoginStatus(function(response) {
+  // Check login status on load, and if the user is
+  // already logged in, go directly to the welcome message.
+  if (response.status == 'connected') {
+    onLogin(response);
+  } else {
+    // Otherwise, show Login dialog first.
+    FB.login(function(response) {
+      onLogin(response);
+    }, {scope: 'user_friends, email'});
+  }
+});
+
 </script>
+<h1 id="fb-welcome"></h1>
+
 <section class='container'>
           <hgroup>
             <h1>HELLO MATTHEW STRESINSKY.  I HAVE A WEBPAGE HOSTED ON A FREE SERVER AND THE ABILITY TO PUSH CODE CHANGES TO THE SERVER USING GIT.  I STILL NEED TO FIGURE OUT HOW TO LET MULTIPLE PEOPLE PUSH CHANGES THOUGH.</h1>
