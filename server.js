@@ -92,21 +92,21 @@ var SampleApp = function() {
     /**
      *  Create the routing table entries + handlers for the application.
      */
-    self.createRoutes = function() {
-        self.routes = { };
+    self.createGroutes = function() {
+        self.groutes = { };
 
-        self.routes['/asciimo'] = function(req, res) {
+        self.groutes['/asciimo'] = function(req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
 
-        self.routes['/'] = function(req, res) {
+        self.groutes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
     };
 
-    self.postRoutes = function() {
+    self.createProutes = function() {
         self.proutes = { };
         self.proutes['/post'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
@@ -120,13 +120,13 @@ var SampleApp = function() {
      *  the handlers.
      */
     self.initializeServer = function() {
-        self.createRoutes();
-        self.postRoutes();
+        self.createGroutes();
+        self.createProutes();
         self.app = express.createServer();
 
         //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
+        for (var r in self.groutes) {
+            self.app.get(r, self.groutes[r]);
         }
         for (var r in self.proutes) {
             self.app.post(r, self.proutes[r]);
