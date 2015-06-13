@@ -108,7 +108,7 @@ var SampleApp = function() {
 
     self.createProutes = function() {
         self.proutes = { };
-        self.proutes['/post'] = function(req, res) {
+        self.proutes['/feed'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
