@@ -106,6 +106,14 @@ var SampleApp = function() {
         };
     };
 
+    self.postRoutes = function() {
+        self.proutes = { };
+        self.proutes['/post'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('index.html') );
+        };
+    };
+
 
     /**
      *  Initialize the server (express) and create the routes and register
@@ -113,11 +121,15 @@ var SampleApp = function() {
      */
     self.initializeServer = function() {
         self.createRoutes();
+        self.postRoutes();
         self.app = express.createServer();
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
+        }
+        for (var r in self.proutes) {
+            self.app.post(r, self.proutes[r]);
         }
     };
 
