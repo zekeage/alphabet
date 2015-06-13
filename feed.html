@@ -39,8 +39,10 @@ MORE TEXT THAT YOU SHOULD SEE
     });
   }
 }
+</script>
 
-  FB.getLoginStatus(function(response) {
+<script>
+  setTimeout(function(){FB.getLoginStatus(function(response) {
     console.log('checking logged in status');
   // Check login status on load, and if the user is
   // already logged in, go directly to the welcome message.
@@ -52,9 +54,9 @@ MORE TEXT THAT YOU SHOULD SEE
       onLogin(response);
     }, {scope: 'user_friends, email'});
   }
-});
-
+});},1000);
 </script>
+
 <h1 id="fb-welcome"></h1>
 
 
