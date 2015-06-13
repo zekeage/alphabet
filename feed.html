@@ -40,6 +40,7 @@ MORE TEXT THAT YOU SHOULD SEE
 }
 
   FB.getLoginStatus(function(response) {
+    console.log('checking logged in status');
   // Check login status on load, and if the user is
   // already logged in, go directly to the welcome message.
   if (response.status == 'connected') {
