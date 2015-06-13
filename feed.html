@@ -42,19 +42,24 @@ MORE TEXT THAT YOU SHOULD SEE
 </script>
 
 <script>
-  setTimeout(function(){FB.getLoginStatus(function(response) {
-    console.log('checking logged in status');
-  // Check login status on load, and if the user is
-  // already logged in, go directly to the welcome message.
-  if (response.status == 'connected') {
-    onLogin(response);
-  } else {
-    // Otherwise, show Login dialog first.
-    FB.login(function(response) {
-      onLogin(response);
-    }, {scope: 'user_friends, email'});
-  }
-});},1000);
+  var checkforFB = setInterval(function(){
+      if (typeof FB != 'undefined') {
+        clearInterval(checkforFB);
+        FB.getLoginStatus(function(response) {
+        console.log('checking logged in status');
+      // Check login status on load, and if the user is
+      // already logged in, go directly to the welcome message.
+        if (response.status == 'connected') {
+          onLogin(response);
+        } else {
+          // Otherwise, show Login dialog first.
+          FB.login(function(response) {
+            onLogin(response);
+          }, {scope: 'user_friends, email'});
+        }
+        });}
+        else {console.log('waiting for FB to be ready');}
+    },100);
 </script>
 
 <h1 id="fb-welcome"></h1>
