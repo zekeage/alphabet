@@ -3,13 +3,6 @@
 var express = require('express');
 var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'adminEvgyLW9',
-  password : 'mvbBeSgIFs-P',
-  database : 'alphabet'
-});
 
 /**
  *  Define the sample application.
@@ -181,10 +174,4 @@ var alphabet = function() {
 var zapp = new alphabet();
 zapp.initialize();
 zapp.start();
-connection.connect(function(err){
-if(!err) {
-    console.log("Database is connected ... \n\n");  
-} else {
-    console.log("Error connecting database ... \n\n");  
-}
-});
+
