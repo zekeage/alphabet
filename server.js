@@ -55,6 +55,7 @@ var alphabet = function() {
     self.cache_get = function(key) { return self.zcache[key]; };
 
 
+
     /**
      *  terminator === the termination handler
      *  Terminate server on receipt of the specified signal.
@@ -112,6 +113,10 @@ var alphabet = function() {
         self.proutes['/feed'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('feed.html') );
+        };
+        self.proutes['/query'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send('HELLO ');
         };
     };
 
