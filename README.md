@@ -1,7 +1,7 @@
 The OpenShift `nodejs` cartridge documentation can be found at:
-zekkkkekekekekkekek
 
 http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+
 
 //Making code changes
 //Install the Git client for your operating system, and from your command line run
