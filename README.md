@@ -17,7 +17,7 @@ git push
 MongoDB 2.4 database added.  Please make note of these credentials:
 
    Root User:     admin
-   Root Password: 5NcTw3ZcA-Em
+   Root Password: 
    Database Name: alphabet
 
 Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
