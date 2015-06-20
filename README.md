@@ -21,3 +21,8 @@ MongoDB 2.4 database added.  Please make note of these credentials:
    Database Name: alphabet
 
 Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+
+website is https:
+http://alphabet-whatitis.rhcloud.com/
+
+ssh 557513a15973ca6b6a000050@alphabet-whatitis.rhcloud.com
