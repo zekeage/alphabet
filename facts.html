@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Welcome to OpenShift</title>
+
+<style></style>
+This is text. Keep looking!
+</head>
+
+<body>
+MORE TEXT THAT YOU SHOULD SEE
+<script>
+  window.fbAsyncInit = function() {
+    console.log('initializing');
+    FB.init({
+      appId      : '108718566132494',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+    console.log('initializing2');
+    // ADD ADDITIONAL FACEBOOK CODE HERE
+  };
+
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+   function onLogin(response) {
+  if (response.status == 'connected') {
+    FB.api('/me?fields=first_name', function(data) {
+      var welcomeBlock = document.getElementById('fb-welcome');
+      welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+      console.log(data);
+    });
+  }
+}
+</script>
+
+<script>
+  var checkforFB = setInterval(function(){
+      if (typeof FB != 'undefined') {
+        clearInterval(checkforFB);
+        FB.getLoginStatus(function(response) {
+        console.log('checking logged in status');
+      // Check login status on load, and if the user is
+      // already logged in, go directly to the welcome message.
+        if (response.status == 'connected') {
+          onLogin(response);
+        } else {
+          // Otherwise, show Login dialog first.
+          FB.login(function(response) {
+            onLogin(response);
+          }, {scope: 'user_friends, email'});
+        }
+        });}
+        else {console.log('waiting for FB to be ready');}
+    },100);
+</script>
+
+<h1 id="fb-welcome"></h1>
+
+
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+</body>
+</html>
