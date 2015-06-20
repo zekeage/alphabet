@@ -167,7 +167,7 @@ var alphabet = function() {
     // Gets a random fact from the "facts" table
     self.getRandomFact = function() {
         ERRCONSOLE.push('called me, maybe');
-        connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
+        var temp = connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
           if (!err)
           {
             ERRCONSOLE.push('found rows');
@@ -180,6 +180,7 @@ var alphabet = function() {
             return 'OOPS I LET YOU DOWN';
           }
         });
+        return temp;
     }
 };
 
