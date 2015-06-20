@@ -1,5 +1,6 @@
 #!/bin/env node
 //  OpenShift sample Node application
+ERRCONSOLE = ['firstElement'];
 var express = require('express');
 var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
@@ -112,6 +113,10 @@ var alphabet = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send("<html>" + self.getRandomFact() + "</html>")
         };
+        self.groutes['/console'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send("<html><body>" + ERRCONSOLE + "</body></html>")
+        };
     };
 
     self.createProutes = function() {
@@ -163,9 +168,11 @@ var alphabet = function() {
     self.getRandomFact = function() {
         connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
           if (!err)
+            ERRCONSOLE.push('found rows');
             return 'NOT ERROR!';
           else
             console.log('Error while performing Query.');
+            ERRCONSOLE.push('did not find rows');
             return 'OOPS I LET YOU DOWN';
         });
     }
@@ -180,14 +187,18 @@ var main = function() {
     var zapp = new alphabet();
     zapp.initialize();
     zapp.start();
+    ERRCONSOLE.push('server is alive1? ');
     connection.connect();
 
     connection.query('SELECT * from facts', function(err, rows, fields) {
       if (!err)
         console.log('The solution is: ', rows);
+        ERRCONSOLE.push('query succeeded');
       else
         console.log('Error while performing Query.');
+        ERRCONSOLE.push('query failed');
     });
+    ERRCONSOLE.push('server is alive2? ');
 }
 
 main()
