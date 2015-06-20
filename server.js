@@ -107,6 +107,11 @@ var alphabet = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('facts.html') );
         };
+
+        self.groutes['/randomfact'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send("hello");
+        };
     };
 
     self.createProutes = function() {
@@ -114,10 +119,6 @@ var alphabet = function() {
         self.proutes['/feed'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('feed.html') );
-        };
-        self.proutes['/query'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send('HELLO ');
         };
     };
 
