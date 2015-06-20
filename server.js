@@ -15,18 +15,15 @@ var connection = mysql.createConnection({
  *  Define the sample application.
  */
 var alphabet = function() {
-
     //  Scope.
     var self = this;
 
 
-    /*  ================================================================  */
-    /*  Helper functions.                                                 */
-    /*  ================================================================  */
+    /*===================*/
+    /* Helper functions. */
+    /*===================*/
 
-    /**
-     *  Set up server IP address and port # using env variables/defaults.
-     */
+    // Set up server IP address and port # using env variables/defaults.
     self.setupVariables = function() {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
@@ -41,14 +38,11 @@ var alphabet = function() {
     };
 
 
-    /**
-     *  Populate the cache.
-     */
+    // Populate the cache.
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
             self.zcache = { 'index.html': '' ,'feed.html': '' ,'facts.html': '' };
         }
-
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./index.html');
         self.zcache['feed.html'] = fs.readFileSync('./feed.html');
@@ -56,19 +50,15 @@ var alphabet = function() {
     };
 
 
-    /**
-     *  Retrieve entry (content) from cache.
-     *  @param {string} key  Key identifying content to retrieve from cache.
-     */
+    // Retrieve entry (content) from cache.
+    // key -> Key identifying content to retrieve from cache.
     self.cache_get = function(key) { return self.zcache[key]; };
 
 
 
-    /**
-     *  terminator === the termination handler
-     *  Terminate server on receipt of the specified signal.
-     *  @param {string} sig  Signal to terminate on.
-     */
+    // terminator === the termination handler
+    // Terminate server on receipt of the specified signal.
+    // @param {string} sig  Signal to terminate on.
     self.terminator = function(sig){
         if (typeof sig === "string") {
            console.log('%s: Received %s - terminating sample app ...',
@@ -79,9 +69,7 @@ var alphabet = function() {
     };
 
 
-    /**
-     *  Setup termination handlers (for exit and a list of signals).
-     */
+    // Setup termination handlers (for exit and a list of signals).
     self.setupTerminationHandlers = function(){
         //  Process on exit and signals.
         process.on('exit', function() { self.terminator(); });
@@ -95,13 +83,13 @@ var alphabet = function() {
     };
 
 
-    /*  ================================================================  */
-    /*  App server functions (main app logic here).                       */
-    /*  ================================================================  */
 
-    /**
-     *  Create the routing table entries + handlers for the application.
-     */
+
+    /*=============================================*/
+    /* App server functions (main app logic here). */
+    /*=============================================*/
+
+    // Create the routing table entries + handlers for the application.
     self.createGroutes = function() {
         self.groutes = { };
 
@@ -134,10 +122,8 @@ var alphabet = function() {
     };
 
 
-    /**
-     *  Initialize the server (express) and create the routes and register
-     *  the handlers.
-     */
+    // Initialize the server (express) and create the routes and register
+    // the handlers.
     self.initializeServer = function() {
         self.createGroutes();
         self.createProutes();
@@ -152,10 +138,7 @@ var alphabet = function() {
         }
     };
 
-
-    /**
-     *  Initializes the sample application.
-     */
+    // Initializes the sample application.
     self.initialize = function() {
         self.setupVariables();
         self.populateCache();
@@ -166,9 +149,7 @@ var alphabet = function() {
     };
 
 
-    /**
-     *  Start the server (starts up the sample application).
-     */
+    // Start the server (starts up the sample application).
     self.start = function() {
         //  Start the app on the specific interface (and port).
         self.app.listen(self.port, self.ipaddress, function() {
@@ -176,21 +157,25 @@ var alphabet = function() {
                         Date(Date.now() ), self.ipaddress, self.port);
         });
     };
-
-};   /*  Sample Application.  */
-
+};
 
 
-/**
- *  main():  Main code.
- */
-var zapp = new alphabet();
-zapp.initialize();
-zapp.start();
-connection.connect(function(err){
-if(!err) {
-    console.log("Database is connected ... \n\n");  
-} else {
-    console.log("Error connecting database ... \n\n");  
+
+/*============*/
+/* Main code. */
+/*============*/
+var main = function() {
+    var zapp = new alphabet();
+    zapp.initialize();
+    zapp.start();
+    connection.connect();
+
+    connection.query('SELECT * from facts', function(err, rows, fields) {
+      if (!err)
+        console.log('The solution is: ', rows);
+      else
+        console.log('Error while performing Query.');
+    });
 }
-});
+
+main()
