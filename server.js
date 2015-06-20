@@ -46,12 +46,13 @@ var alphabet = function() {
      */
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' ,'feed.html': '' };
+            self.zcache = { 'index.html': '' ,'feed.html': '' ,'facts.html': '' };
         }
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./index.html');
         self.zcache['feed.html'] = fs.readFileSync('./feed.html');
+        self.zcache['facts.html'] = fs.readFileSync('./facts.html');
     };
 
 
@@ -112,6 +113,11 @@ var alphabet = function() {
         self.groutes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
+        };
+
+        self.groutes['/facts'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('facts.html') );
         };
     };
 
