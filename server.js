@@ -163,7 +163,7 @@ var alphabet = function() {
     self.getRandomFact = function() {
         connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
           if (!err)
-            return rows;
+            return 'NOT ERROR!';
           else
             console.log('Error while performing Query.');
             return 'OOPS I LET YOU DOWN';
