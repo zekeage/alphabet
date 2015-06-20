@@ -1,6 +1,7 @@
 #!/bin/env node
 //  OpenShift sample Node application
 var ERRCONSOLE = ['firstElement'];
+var queryResult = [];
 var express = require('express');
 var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
@@ -111,7 +112,11 @@ var alphabet = function() {
 
         self.groutes['/randomfact'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send("<html>" + self.getRandomFact() + "</html>");
+            query("SELECT fact FROM facts LIMIT 1", function(results) {
+              queryResult = results;
+              ERRCONSOLE.push(queryResult);});
+            //setTimeout(function() {res.send("<html>" + queryResult + "</html>");}, 500);
+              res.send("<html>" + queryResult + "</html>");
         };
         self.groutes['/console'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
@@ -182,6 +187,18 @@ var alphabet = function() {
         });
         return temp[0];
     }
+    self.getRandomFact2 = function(thequery,callback)
+    {
+      connection.query(thequery, function (error,results,fields) {
+        if (error) {
+            ERRCONSOLE.push('not found rows');
+        }
+        if (results.length  > 0) {
+            callback(results);
+        }
+      }) 
+    }
+
 };
 
 
