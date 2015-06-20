@@ -4,6 +4,7 @@ var express = require('express');
 var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
 var mysql      = require('mysql');
+var log_array = [];
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'adminEvgyLW9',
@@ -112,6 +113,14 @@ var alphabet = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send("<html>" + self.getRandomFact() + "</html>")
         };
+        self.groutes['/log'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            var console_log = "";
+            for(idx = 0; idx < log_array.length; idx++) {
+                console_log += "<li>" + log_array[i] + "</li>"
+            }
+            res.send("<html><ul>" + console_log + "</ul></html>")
+        };
     };
 
     self.createProutes = function() {
@@ -168,6 +177,10 @@ var alphabet = function() {
             console.log('Error while performing Query.');
             return 'OOPS I LET YOU DOWN';
         });
+    }
+
+    self.log = function(str) {
+        log_array.push(str)
     }
 };
 
