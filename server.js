@@ -1,6 +1,6 @@
 #!/bin/env node
 //  OpenShift sample Node application
-ERRCONSOLE = ['firstElement'];
+var ERRCONSOLE = ['firstElement'];
 var express = require('express');
 var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
