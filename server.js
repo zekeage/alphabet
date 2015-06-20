@@ -166,6 +166,7 @@ var alphabet = function() {
             return rows
           else
             console.log('Error while performing Query.');
+            return "OOPS I LET YOU DOWN"
         });
     }
 };
