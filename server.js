@@ -110,7 +110,7 @@ var alphabet = function() {
 
         self.groutes['/randomfact'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send("hello");
+            res.send("<html>" + self.getRandomFact() + "</html>")
         };
     };
 
@@ -158,6 +158,16 @@ var alphabet = function() {
                         Date(Date.now() ), self.ipaddress, self.port);
         });
     };
+
+    // Gets a random fact from the "facts" table
+    self.getRandomFact = function() {
+        connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
+          if (!err)
+            return rows
+          else
+            console.log('Error while performing Query.');
+        });
+    }
 };
 
 
