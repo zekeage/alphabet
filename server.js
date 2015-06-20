@@ -163,10 +163,10 @@ var alphabet = function() {
     self.getRandomFact = function() {
         connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
           if (!err)
-            return rows
+            return rows;
           else
             console.log('Error while performing Query.');
-            return "OOPS I LET YOU DOWN"
+            return "OOPS I LET YOU DOWN";
         });
     }
 };
