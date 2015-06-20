@@ -180,7 +180,7 @@ var alphabet = function() {
             return 'OOPS I LET YOU DOWN';
           }
         });
-        return temp;
+        return temp[0];
     }
 };
 
