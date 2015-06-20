@@ -194,6 +194,7 @@ var alphabet = function() {
             ERRCONSOLE.push('not found rows');
         }
         if (results.length  > 0) {
+            ERRCONSOLE.push(' found rows');
             callback(results);
         }
       }) 
