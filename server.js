@@ -7,7 +7,7 @@ var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : 'localhost:3306',
   user     : 'adminEvgyLW9',
   password : 'mvbBeSgIFs-P',
   database : 'alphabet'
