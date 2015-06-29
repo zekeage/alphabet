@@ -134,7 +134,7 @@ var alphabet = function() {
             var fid = req.query['fid'];
             console.log(fid);
             //var data = {"Data":""};
-            connection.query("SELECT fact FROM facts where id = " + 4,function(err, rows, fields){
+            connection.query("SELECT fact FROM facts where id = mod(" + fid + ",(select count(*) FROM facts) ))",function(err, rows, fields){
             //connection.query("SELECT fact FROM facts as r1 JOIN \
             //(SELECT CEIL(RAND() * (SELECT MAX(id) FROM random)) AS id) AS r2 \
             //WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1", 
