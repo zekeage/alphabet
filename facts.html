@@ -19,7 +19,8 @@ This is text. Keep looking!
   htreq.onreadystatechange=function()
       {if (htreq.readyState==4 && htreq.status==200)
         { var t = JSON.parse(htreq.responseText);
-          document.getElementById().innerHTML = t["data"]["fact"];
+          console.log(t);
+          document.getElementById(factdiv).innerHTML = t["data"]["fact"];
         }
       }
 
