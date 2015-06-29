@@ -110,20 +110,6 @@ var alphabet = function() {
             res.send(self.cache_get('facts.html') );
         };
 
-        self.groutes['/randomfact'] = function(req, res) {
-            var data = {
-                "Data":""
-            };
-            connection.query("SELECT fact FROM facts LIMIT 1",function(err, rows, fields){
-                if(rows.length != 0){
-                    data["Data"] = rows;
-                    res.send(data);
-                }else{
-                    data["Data"] = 'No data Found..';
-                    res.send(data);
-                }
-            });
-        };
 //            console.log("fact request went through");
  //           res.setHeader('Content-Type', 'text/html');
   //          self.getRandomFact2("SELECT fact FROM facts LIMIT 1", function(results) {
@@ -142,6 +128,20 @@ var alphabet = function() {
         self.proutes['/feed'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('feed.html') );
+        };
+        self.proutes['/randomfact'] = function(req, res) {
+            var data = {
+                "Data":""
+            };
+            connection.query("SELECT fact FROM facts LIMIT 1",function(err, rows, fields){
+                if(rows.length != 0){
+                    data["Data"] = rows;
+                    res.send(data);
+                }else{
+                    data["Data"] = 'No data Found..';
+                    res.send(data);
+                }
+            });
         };
     };
 
