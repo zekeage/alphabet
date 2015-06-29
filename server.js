@@ -214,10 +214,10 @@ var main = function() {
     ERRCONSOLE.push('server is alive1? ');
     connection.connect();
 
-    connection.query('SELECT * from facts', function(err, rows, fields) {
+    connection.query("SELECT fact FROM facts LIMIT 1", function(err, rows, fields) {
       if (!err)
       {
-        console.log('The solution is: ', rows);
+        console.log(rows);
         ERRCONSOLE.push('query succeeded');
       }
       else
