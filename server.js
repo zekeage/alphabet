@@ -131,7 +131,6 @@ var alphabet = function() {
  //             ERRCONSOLE.push(queryResult);});
             //setTimeout(function() {res.send("<html>" + queryResult + "</html>");}, 500);
       //        res.send("<html>" + queryResult + "</html>");
-        };
         self.groutes['/console'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send("<html><body>" + ERRCONSOLE + "</body></html>");
