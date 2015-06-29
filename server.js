@@ -7,10 +7,10 @@ var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'process.env.OPENSHIFT_MYSQL_DB_HOST',
-  user     : 'process.env.OPENSHIFT_MYSQL_DB_USERNAME',
-  password : 'process.env.OPENSHIFT_MYSQL_DB_PASSWORD',
-  database : 'process.env.OPENSHIFT_GEAR_NAME',
+  host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
+  user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
+  password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
+  database : process.env.OPENSHIFT_GEAR_NAME,
 });
 
 /**
