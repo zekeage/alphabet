@@ -21,8 +21,8 @@ This is text. Keep looking!
       {if (htreq.readyState==4 && htreq.status==200)
         { var t = JSON.parse(htreq.responseText);
           console.log(t);
-          document.getElementById(factdiv1).innerHTML = t;
-          document.getElementById(factdiv2).innerHTML = t["fact"];
+          document.getElementById('factdiv1').innerHTML = t;
+          document.getElementById('factdiv2').innerHTML = t["fact"];
         }
       }
 
