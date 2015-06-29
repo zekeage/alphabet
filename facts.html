@@ -6,7 +6,6 @@
   <title>Welcome to OpenShift</title>
 
 <style></style>
-This is text. Keep looking!
 </head>
 
 <body>
@@ -37,7 +36,7 @@ This is text. Keep looking!
 
   function getFact(el){console.log('hi!');
     document.getElementById("getFactButt").innerHTML = 'OOOH, THAT FELT GOOD.';
-    htreq.open( "POST", "randomfact?", true );htreq.send();
+    htreq.open( "POST", "randomfact?3", true );htreq.send();
   }
 
   (function(d, s, id){
