@@ -10,13 +10,18 @@ This is text. Keep looking!
 </head>
 
 <body>
-MORE TEXT THAT YOU SHOULD SEE. FACTS WILL BE SHOWN BELOW:
+<br>
+<div id="factdiv"></div>
+<br>
 <button id="getFactButt" onclick="getFact(this)">PRESS ME</button>
 <script>
   htreq = new XMLHttpRequest(); 
   htreq.onreadystatechange=function()
       {if (htreq.readyState==4 && htreq.status==200)
-        {console.log (htreq.responseText);}}
+        { var t = JSON.parse(htreq.responseText);
+          document.getElementById().innerHTML = t["data"]["fact"];
+        }
+      }
 
   window.fbAsyncInit = function() {
     console.log('initializing');
