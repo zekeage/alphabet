@@ -13,6 +13,11 @@ This is text. Keep looking!
 MORE TEXT THAT YOU SHOULD SEE. FACTS WILL BE SHOWN BELOW:
 <button id="getFactButt" onclick="getFact(this)">PRESS ME</button>
 <script>
+  htreq = new XMLHttpRequest(); 
+  htreq.onreadystatechange=function()
+      {if (htreq.readyState==4 && htreq.status==200)
+        {console.log ('post succeeded');}}
+
   window.fbAsyncInit = function() {
     console.log('initializing');
     FB.init({
@@ -24,7 +29,10 @@ MORE TEXT THAT YOU SHOULD SEE. FACTS WILL BE SHOWN BELOW:
     // ADD ADDITIONAL FACEBOOK CODE HERE
   };
 
-  getFact = function(el){console.log('hi!'); getElementById("getFactButt").innerHTML = 'YOU PRESSED ME';}
+  getFact = function(el){console.log('hi!');
+    document.getElementById("getFactButt").innerHTML = 'YOU PRESSED ME';
+    htreq.open( "POST", "randomfact?", true );htreq.send();
+  }
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
