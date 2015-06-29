@@ -123,7 +123,7 @@ var alphabet = function() {
                     res.send(data);
                 }
             });
-        });
+        };
 //            console.log("fact request went through");
  //           res.setHeader('Content-Type', 'text/html');
   //          self.getRandomFact2("SELECT fact FROM facts LIMIT 1", function(results) {
