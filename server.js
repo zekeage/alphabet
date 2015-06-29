@@ -130,8 +130,9 @@ var alphabet = function() {
             res.send(self.cache_get('feed.html') );
         };
         self.proutes['/randomfact'] = function(req, res) {
+            console.log(req);
             //var data = {"Data":""};
-            connection.query("SELECT fact FROM facts LIMIT 1",function(err, rows, fields){
+            connection.query("SELECT fact FROM facts where id = 3",function(err, rows, fields){
                 if(rows.length != 0){
                     //data["Data"] = rows;
                     res.send(rows);

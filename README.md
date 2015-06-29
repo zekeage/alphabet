@@ -26,3 +26,10 @@ website is https:
 http://alphabet-whatitis.rhcloud.com/
 
 ssh 557513a15973ca6b6a000050@alphabet-whatitis.rhcloud.com
+
+command to REPLACE facts table with the data in facts.csv:
+
+//delete
+truncate facts;
+
+load data infile '/var/lib/openshift/557513a15973ca6b6a000050/app-root/repo/facts.csv' into table facts columns terminated by ',' optionally enclosed by '"' escaped by '"' lines terminated by '\n' ignore 1 lines;
