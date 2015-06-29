@@ -36,7 +36,8 @@
 
   function getFact(el){console.log('hi!');
     document.getElementById("getFactButt").innerHTML = 'OOOH, THAT FELT GOOD.';
-    htreq.open( "POST", "randomfact?fid=3", true );htreq.send();
+    var num = Math.floor((Math.random() * 99999) + 1)
+    htreq.open( "POST", "randomfact?fid=num", true );htreq.send();
   }
 
   (function(d, s, id){
