@@ -26,8 +26,9 @@ website is https:
 http://alphabet-whatitis.rhcloud.com/
 
 ssh 557513a15973ca6b6a000050@alphabet-whatitis.rhcloud.com
-
+and use 'tail_all' to see console
 command to REPLACE facts table with the data in facts.csv:
+
 
 //delete
 truncate facts;
