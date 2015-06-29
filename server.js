@@ -111,6 +111,7 @@ var alphabet = function() {
         };
 
         self.groutes['/randomfact'] = function(req, res) {
+            console.log("made it to here");
             res.setHeader('Content-Type', 'text/html');
             self.getRandomFact2("SELECT fact FROM facts LIMIT 1", function(results) {
               queryResult = results;
