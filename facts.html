@@ -11,7 +11,8 @@ This is text. Keep looking!
 
 <body>
 <br>
-<div id="factdiv"></div>
+<div id="factdiv1"></div>
+<div id="factdiv2"></div>
 <br>
 <button id="getFactButt" onclick="getFact(this)">PRESS ME</button>
 <script>
@@ -20,7 +21,8 @@ This is text. Keep looking!
       {if (htreq.readyState==4 && htreq.status==200)
         { var t = JSON.parse(htreq.responseText);
           console.log(t);
-          document.getElementById(factdiv).innerHTML = t["data"]["fact"];
+          document.getElementById(factdiv1).innerHTML = t;
+          document.getElementById(factdiv2).innerHTML = t["fact"];
         }
       }
 
@@ -36,7 +38,7 @@ This is text. Keep looking!
   };
 
   function getFact(el){console.log('hi!');
-    document.getElementById("getFactButt").innerHTML = 'YOU PRESSED ME';
+    document.getElementById("getFactButt").innerHTML = 'OOOH, THAT FELT GOOD.';
     htreq.open( "POST", "randomfact?", true );htreq.send();
   }
 

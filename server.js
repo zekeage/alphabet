@@ -130,16 +130,14 @@ var alphabet = function() {
             res.send(self.cache_get('feed.html') );
         };
         self.proutes['/randomfact'] = function(req, res) {
-            var data = {
-                "Data":""
-            };
+            //var data = {"Data":""};
             connection.query("SELECT fact FROM facts LIMIT 1",function(err, rows, fields){
                 if(rows.length != 0){
-                    data["Data"] = rows;
-                    res.send(data);
+                    //data["Data"] = rows;
+                    res.send(rows);
                 }else{
-                    data["Data"] = 'No data Found..';
-                    res.send(data);
+                    //data["Data"] = 'No data Found..';
+                    res.send('No data Found');
                 }
             });
         };
