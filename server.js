@@ -133,9 +133,9 @@ var alphabet = function() {
             console.log(req);
             //var data = {"Data":""};
             //connection.query("SELECT fact FROM facts where id = 3",function(err, rows, fields){
-            connection.query("SELECT fact FROM facts as r1 JOIN
-            (SELECT CEIL(RAND() * (SELECT MAX(id) FROM random)) AS id) AS r2
-            WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1",
+            connection.query("SELECT fact FROM facts as r1 JOIN \
+            (SELECT CEIL(RAND() * (SELECT MAX(id) FROM random)) AS id) AS r2 \
+            WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1", 
                 function(err, rows, fields){
                 if(rows.length != 0){
                     //data["Data"] = rows;
