@@ -12,6 +12,7 @@ var connection = mysql.createConnection({
   password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
   database : process.env.OPENSHIFT_GEAR_NAME,
 });
+var routes = require('./routes/index')(passport);
 
 /**
  *  Define the sample application.
@@ -225,6 +226,7 @@ var alphabet = function() {
 /*============*/
 var main = function() {
     var zapp = new alphabet();
+    zapp.use('/rtest/', routes);
     zapp.initialize();
     zapp.start();
     ERRCONSOLE.push('server is alive1? ');
