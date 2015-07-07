@@ -12,14 +12,14 @@ var connection = mysql.createConnection({
   password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
   database : process.env.OPENSHIFT_GEAR_NAME,
 });
-var passport = require('passport');
+//var passport = require('passport');
 
 // Initialize Passport
-var initPassport = require('./passport/init');
-initPassport(passport);
+//var initPassport = require('./passport/init');
+//initPassport(passport);
 
-var routes = require('./routes/index')(passport);
-app.use('/', routes);
+//var routes = require('./routes/index')(passport);
+//app.use('/', routes);
 
 /**
  *  Define the sample application.
@@ -233,7 +233,7 @@ var alphabet = function() {
 /*============*/
 var main = function() {
     var zapp = new alphabet();
-    zapp.use('/rtest/', routes);
+    //zapp.use('/rtest/', routes);
     zapp.initialize();
     zapp.start();
     ERRCONSOLE.push('server is alive1? ');
