@@ -12,6 +12,7 @@ var connection = mysql.createConnection({
   password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
   database : process.env.OPENSHIFT_GEAR_NAME,
 });
+var passport = require('passport');
 var routes = require('./routes/index')(passport);
 
 /**
