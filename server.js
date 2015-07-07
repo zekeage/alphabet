@@ -13,7 +13,13 @@ var connection = mysql.createConnection({
   database : process.env.OPENSHIFT_GEAR_NAME,
 });
 var passport = require('passport');
+
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
 var routes = require('./routes/index')(passport);
+app.use('/', routes);
 
 /**
  *  Define the sample application.
