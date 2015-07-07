@@ -29,7 +29,7 @@
     "passport" : "latest",
     "passport-local" : "latest", 
     "passport-facebook": "latest",
-    "passport-google-oauth": "latest",
+    "passport-google-oauth": "latest"
   },
   "devDependencies": {},
   "bundleDependencies": [],
