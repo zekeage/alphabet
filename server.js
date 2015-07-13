@@ -1,16 +1,25 @@
 #!/bin/env node
 //  OpenShift sample Node application
+var ERRCONSOLE = ['firstElement'];
+var queryResult = [];
 var express = require('express');
 var fs      = require('fs');
 var mongo = require('mongodb').MongoClient;
 var mysql      = require('mysql');
-var log_array = [];
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'adminEvgyLW9',
-  password : 'mvbBeSgIFs-P',
-  database : 'alphabet'
+  host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
+  user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
+  password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
+  database : process.env.OPENSHIFT_GEAR_NAME,
 });
+//var passport = require('passport');
+
+// Initialize Passport
+//var initPassport = require('./passport/init');
+//initPassport(passport);
+
+//var routes = require('./routes/index')(passport);
+//app.use('/', routes);
 
 /**
  *  Define the sample application.
@@ -109,17 +118,16 @@ var alphabet = function() {
             res.send(self.cache_get('facts.html') );
         };
 
-        self.groutes['/randomfact'] = function(req, res) {
+//            console.log("fact request went through");
+ //           res.setHeader('Content-Type', 'text/html');
+  //          self.getRandomFact2("SELECT fact FROM facts LIMIT 1", function(results) {
+   //           queryResult = results;
+ //             ERRCONSOLE.push(queryResult);});
+            //setTimeout(function() {res.send("<html>" + queryResult + "</html>");}, 500);
+      //        res.send("<html>" + queryResult + "</html>");
+        self.groutes['/console'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send("<html>" + self.getRandomFact() + "</html>")
-        };
-        self.groutes['/log'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            var console_log = "";
-            for(idx = 0; idx < log_array.length; idx++) {
-                console_log += "<li>" + log_array[i] + "</li>"
-            }
-            res.send("<html><ul>" + console_log + "</ul></html>")
+            res.send("<html><body>" + ERRCONSOLE + "</body></html>");
         };
     };
 
@@ -128,6 +136,23 @@ var alphabet = function() {
         self.proutes['/feed'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('feed.html') );
+        };
+        self.proutes['/randomfact'] = function(req, res) {
+            console.log(req.query['fid']);
+            var fid = req.query['fid'];
+            console.log(fid);
+            //var data = {"Data":""};
+
+            connection.query("select fact from facts where id = (1+mod(" + fid + "-1, (SELECT count(*) from facts)));",function(err, rows, fields){
+
+                if(rows.length != 0){
+                    //data["Data"] = rows;
+                    res.send(rows);
+                }else{
+                    //data["Data"] = 'No data Found..';
+                    res.send('No data Found');
+                }
+            });
         };
     };
 
@@ -170,18 +195,35 @@ var alphabet = function() {
 
     // Gets a random fact from the "facts" table
     self.getRandomFact = function() {
-        connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
+        ERRCONSOLE.push('called me, maybe');
+        var temp = connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
           if (!err)
+          {
+            ERRCONSOLE.push('found rows');
             return 'NOT ERROR!';
+          }
           else
+          {
             console.log('Error while performing Query.');
+            ERRCONSOLE.push('did not find rows');
             return 'OOPS I LET YOU DOWN';
+          }
         });
+        return temp[0];
+    }
+    self.getRandomFact2 = function(thequery,callback)
+    {
+      connection.query(thequery, function (error,results,fields) {
+        if (error) {
+            ERRCONSOLE.push('not found rows');
+        }
+        if (results.length  > 0) {
+            ERRCONSOLE.push(' found rows');
+            callback(results);
+        }
+      }) 
     }
 
-    self.log = function(str) {
-        log_array.push(str)
-    }
 };
 
 
@@ -191,16 +233,25 @@ var alphabet = function() {
 /*============*/
 var main = function() {
     var zapp = new alphabet();
+    //zapp.use('/rtest/', routes);
     zapp.initialize();
     zapp.start();
+    ERRCONSOLE.push('server is alive1? ');
     connection.connect();
 
-    connection.query('SELECT * from facts', function(err, rows, fields) {
+    connection.query("SELECT fact FROM facts LIMIT 1", function(err, rows, fields) {
       if (!err)
-        console.log('The solution is: ', rows);
+      {
+        console.log(rows);
+        ERRCONSOLE.push('query succeeded');
+      }
       else
+      {
         console.log('Error while performing Query.');
+        ERRCONSOLE.push('query failed');
+      }
     });
+    ERRCONSOLE.push('server is alive2? ');
 }
 
 main()

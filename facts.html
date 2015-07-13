@@ -6,12 +6,24 @@
   <title>Welcome to OpenShift</title>
 
 <style></style>
-This is text. Keep looking!
 </head>
 
 <body>
-MORE TEXT THAT YOU SHOULD SEE. FACTS WILL BE SHOWN BELOW:
+<br>
+<div id="factdiv1"></div>
+<div id="factdiv2"></div>
+<br>
+<button id="getFactButt" onclick="getFact(this)">PRESS ME</button>
+<button id="getFactButtFB" onclick="getFactFB(this)">PRESS ME</button>
 <script>
+  htreq = new XMLHttpRequest(); 
+  htreq.onreadystatechange=function()
+      {if (htreq.readyState==4 && htreq.status==200)
+        { var t = JSON.parse(htreq.responseText);
+          document.getElementById('factdiv2').innerHTML = t[0]["fact"];
+        }
+      }
+
   window.fbAsyncInit = function() {
     console.log('initializing');
     FB.init({
@@ -23,6 +35,11 @@ MORE TEXT THAT YOU SHOULD SEE. FACTS WILL BE SHOWN BELOW:
     // ADD ADDITIONAL FACEBOOK CODE HERE
   };
 
+  function getFact(el){console.log('hi!');
+    document.getElementById("getFactButt").innerHTML = 'OOOH, THAT FELT GOOD.';
+    var num = Math.floor((Math.random() * 99999) + 1)
+    htreq.open( "POST", "randomfact?fid=" +num, true );htreq.send();
+  }
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
