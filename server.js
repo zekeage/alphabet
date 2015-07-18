@@ -5,12 +5,27 @@ var queryResult = [];
 var express = require('express');
 var fs      = require('fs');
 var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
-  user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
-  password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
-  database : process.env.OPENSHIFT_GEAR_NAME,
-});
+
+
+var connection;
+if (typeof process.env.OPENSHIFT_MYSQL_DB_HOST === "undefined")
+{
+    connection = mysql.createConnection({
+      host     : '127.0.0.1',
+      user     : 'root',
+      password : 'test',
+      database : 'alphabet',
+    });
+}
+else
+{
+    connection = mysql.createConnection({
+      host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
+      user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
+      password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
+      database : process.env.OPENSHIFT_GEAR_NAME,
+    });
+}
 //var passport = require('passport');
 
 // Initialize Passport
