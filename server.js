@@ -230,10 +230,9 @@ var main = function() {
     //zapp.use('/rtest/', routes);
     zapp.initialize();
     zapp.start();
-    ERRCONSOLE.push('server is alive1? ');
+    console.log('before mysql connect');
     connection.connect();
-
-    ERRCONSOLE.push('server is alive2? ');
+    console.log('after mysql connect');
 }
 
 main()
