@@ -233,18 +233,6 @@ var main = function() {
     ERRCONSOLE.push('server is alive1? ');
     connection.connect();
 
-    connection.query("SELECT fact FROM facts LIMIT 1", function(err, rows, fields) {
-      if (!err)
-      {
-        console.log(rows);
-        ERRCONSOLE.push('query succeeded');
-      }
-      else
-      {
-        console.log('Error while performing Query.');
-        ERRCONSOLE.push('query failed');
-      }
-    });
     ERRCONSOLE.push('server is alive2? ');
 }
 
