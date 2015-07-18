@@ -4,7 +4,6 @@ var ERRCONSOLE = ['firstElement'];
 var queryResult = [];
 var express = require('express');
 var fs      = require('fs');
-var mongo = require('mongodb').MongoClient;
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
@@ -131,17 +130,12 @@ var alphabet = function() {
         };
     };
 
-    self.createProutes = function() {
-        self.proutes = { };
-        self.proutes['/feed'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('feed.html') );
-        };
-        self.proutes['/randomfact'] = function(req, res) {
-            console.log(req.query['fid']);
-            var fid = req.query['fid'];
-            console.log(fid);
-            //var data = {"Data":""};
+    self.createProutes = function() { self.proutes = { };
+    self.proutes['/feed'] = function(req, res) { res.setHeader('Content-Type',
+    'text/html'); res.send(self.cache_get('feed.html') ); };
+    self.proutes['/randomfact'] = function(req, res) {
+    console.log(req.query['fid']); var fid = req.query['fid'];
+    console.log(fid); //var data = {"Data":""};
 
             connection.query("select fact from facts where id = (1+mod(" + fid + "-1, (SELECT count(*) from facts)));",function(err, rows, fields){
 
