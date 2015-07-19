@@ -40,7 +40,7 @@ load data infile '/var/lib/openshift/557513a15973ca6b6a000050/app-root/repo/fact
 load data infile 'D:/Shared Documents/GitHub/alphabet/facts.csv' into table facts columns terminated by ',' optionally enclosed by '"' escaped by '"' lines terminated by '\r\n' ignore 1 lines;
 
 //local testing instructions
-1. navigate to project directory
+1. navigate to project directory (probably not necessary since the files are in the project directory now)
 npm install express
 npm install mysql
 2. download mysql from the internets and install it using these instructions and a password of 'test' for root and ip of 127.0.0.1

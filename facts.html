@@ -14,7 +14,7 @@
 <div id="factdiv2"></div>
 <br>
 <button id="getFactButt" onclick="getFact(this)">PRESS ME</button>
-<button id="getFactButtFB" onclick="getFactFB(this)">PRESS ME</button>
+
 <script>
   htreq = new XMLHttpRequest(); 
   htreq.onreadystatechange=function()
@@ -40,7 +40,7 @@
     var num = Math.floor((Math.random() * 99999) + 1)
     htreq.open( "POST", "randomfact?fid=" +num, true );htreq.send();
   }
-
+  
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}

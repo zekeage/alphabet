@@ -1,6 +1,5 @@
 #!/bin/env node
 //  OpenShift sample Node application
-var ERRCONSOLE = ['firstElement'];
 var queryResult = [];
 var express = require('express');
 var fs      = require('fs');
@@ -139,10 +138,6 @@ var alphabet = function() {
  //             ERRCONSOLE.push(queryResult);});
             //setTimeout(function() {res.send("<html>" + queryResult + "</html>");}, 500);
       //        res.send("<html>" + queryResult + "</html>");
-        self.groutes['/console'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send("<html><body>" + ERRCONSOLE + "</body></html>");
-        };
     };
 
     self.createProutes = function() { self.proutes = { };
@@ -204,17 +199,14 @@ var alphabet = function() {
 
     // Gets a random fact from the "facts" table
     self.getRandomFact = function() {
-        ERRCONSOLE.push('called me, maybe');
         var temp = connection.query('SELECT fact FROM facts LIMIT 1', function(err, rows, fields) {
           if (!err)
           {
-            ERRCONSOLE.push('found rows');
             return 'NOT ERROR!';
           }
           else
           {
             console.log('Error while performing Query.');
-            ERRCONSOLE.push('did not find rows');
             return 'OOPS I LET YOU DOWN';
           }
         });
@@ -224,13 +216,11 @@ var alphabet = function() {
     {
       connection.query(thequery, function (error,results,fields) {
         if (error) {
-            ERRCONSOLE.push('not found rows');
         }
         if (results.length  > 0) {
-            ERRCONSOLE.push(' found rows');
             callback(results);
         }
-      }) 
+      }); 
     }
 
 };
